@@ -1,0 +1,16 @@
+add_executable(
+  restful-music
+  password.cpp
+  username.cpp
+  email.cpp
+  user.cpp
+  uuid.cpp
+  password_encryptor_sodium.cpp
+  database_repository_sqlite.cpp
+  config.cpp
+  jwt_service_impl.cpp
+  user_controller.cpp
+  user_usecase_register.cpp
+  user_usecase_login.cpp
+  main.cpp
+)
