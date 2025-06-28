@@ -36,8 +36,8 @@ bool database_repository_sqlite::user_email_exists(email const &email) const {
 
     query.bind(1, email.value());
 
-    while (query.executeStep()) {
-      exists = query.getColumn(0);
+    if (query.executeStep()) {
+      exists = query.getColumn(0).getInt();
     }
 
     return exists;
@@ -55,8 +55,8 @@ bool database_repository_sqlite::user_username_exists(
                             R"(SELECT 1 FROM users WHERE username = ?)");
     query.bind(1, username.value());
 
-    while (query.executeStep()) {
-      exists = query.getColumn(0);
+    if (query.executeStep()) {
+      exists = query.getColumn(0).getInt();
     }
 
     return exists;
@@ -70,20 +70,15 @@ bool database_repository_sqlite::user_username_exists(
 std::string
 database_repository_sqlite::user_get_password(username const &username) const {
   try {
-    char const *hashed_password;
     SQLite::Statement query(_database,
                             R"(SELECT password FROM users WHERE username = ?)");
     query.bind(1, username.value());
 
-    while (query.executeStep()) {
-      hashed_password = query.getColumn(0);
+    if (query.executeStep()) {
+      return query.getColumn(0).getString();
     }
 
-    if (!hashed_password) {
-      return "";
-    }
-
-    return std::string(hashed_password);
+    return "";
   } catch (std::runtime_error const &ex) {
     throw database_repository_exception{
         database_repository_error_codes::GENERIC, ex.what()};
