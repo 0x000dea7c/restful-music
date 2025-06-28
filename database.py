@@ -10,11 +10,44 @@ def create_database():
 
         cursor.execute("""
         CREATE TABLE IF NOT EXISTS users (
-        uuid TEXT UNIQUE,
+        uuid TEXT PRIMARY KEY,
         username TEXT UNIQUE,
         password TEXT,
         email TEXT UNIQUE
         )
+        """)
+
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS playlists (
+        uuid TEXT PRIMARY KEY,
+        user_uuid TEXT,
+        name TEXT TEXT NOT NULL,
+        description TEXT NOT NULL,
+
+        FOREIGN KEY (user_uuid) REFERENCES users(uuid)
+        )
+        """)
+
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS songs (
+        uuid TEXT PRIMARY KEY,
+        title TEXT NOT NULL,
+        artist TEXT NOT NULL,
+        album TEXT,
+        release_date INTEGER,
+        duration INTEGER
+        )
+        """)
+
+        cursor.execute("""
+        CREATE TABLE playlist_songs (
+        playlist_uuid TEXT,
+        song_uuid TEXT,
+        order INTEGER,
+        PRIMARY KEY (playlist_uuid, song_uuid),
+        FOREIGN KEY (playlist_uuid) REFERENCES playlists(uuid),
+        FOREIGN KEY (song_uuid) REFERENCES songs(uuid)
+        );
         """)
 
         connection.commit()

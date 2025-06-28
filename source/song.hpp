@@ -1,16 +1,21 @@
 #pragma once
 
-#include <string>
-#include <chrono>
+#include "song_album.hpp"
+#include "song_artist.hpp"
+#include "song_duration.hpp"
+#include "song_release_date.hpp"
+#include "song_title.hpp"
+#include "uuid.hpp"
 
 class song
 {
 public:
 
 private:
-  std::string _title;
-  std::string _artist;
-  std::string _album;
-  std::chrono::year_month_day _release_date;
-  std::chrono::seconds _duration;
+  uuid _uuid;
+  song_title _title;
+  song_artist _artist;
+  song_album _album;
+  song_release_date _release_date;
+  song_duration _duration;
 };

@@ -12,5 +12,10 @@ add_executable(
   user_controller.cpp
   user_usecase_register.cpp
   user_usecase_login.cpp
+  song_title.cpp
+  song_artist.cpp
+  song_album.cpp
+  song_release_date.cpp
+  song_duration.cpp
   main.cpp
 )

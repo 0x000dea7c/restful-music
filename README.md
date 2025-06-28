@@ -4,6 +4,8 @@ RESTful Music Playlist API. This is a C++ web application that allows a user to 
 
 The point of this project is to learn how RESTful APIs work and play around with testing libraries in C++.
 
+DISCLAIMER: I don't particularly agree with this philosophy of arranging the code. This is just to learn OOD concepts.
+
 # Playlist Metadata
 
 - Title (required)

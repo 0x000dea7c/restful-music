@@ -7,6 +7,6 @@ class playlist
 public:
 
 private:
-  std::string _title;
+  std::string _name;
   std::string _description;
 };
